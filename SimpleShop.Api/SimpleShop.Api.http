@@ -1,0 +1,71 @@
+# =============================================================================
+#  SimpleShop.Api.http  —  ready-made HTTP requests to try the API
+# =============================================================================
+#  How to use:
+#   • Visual Studio 2022+ / Rider: open this file → click "Send request" / ▶ above a request
+#   • VS Code: install the "REST Client" extension → click "Send Request"
+#  The app must be running first (dotnet run).
+#  Requests are separated by lines starting with ###
+# =============================================================================
+
+@baseUrl = http://localhost:5080
+
+### 1. Health check (the Minimal API endpoint in Program.cs) → 200
+GET {{baseUrl}}/
+
+### 2. Get ALL products → 200 + JSON array
+GET {{baseUrl}}/api/products
+
+### 3. Search products by name (query string) → 200
+GET {{baseUrl}}/api/products?search=mouse
+
+### 4. Get ONE product by id (route parameter) → 200
+GET {{baseUrl}}/api/products/1
+
+### 5. Get a product that doesn't exist → 404 Not Found
+GET {{baseUrl}}/api/products/999
+
+### 6. Create a product → 201 Created (look at the "Location" header!)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "USB-C Cable",
+  "description": "1 meter, fast charging",
+  "price": 9.99,
+  "stock": 100
+}
+
+### 7. Create with INVALID data → 400 Bad Request (automatic validation)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "X",
+  "price": -5,
+  "stock": 99999
+}
+
+### 8. Create with a name that already exists → 409 Conflict (business rule)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "wireless mouse",
+  "price": 19.99,
+  "stock": 5
+}
+
+### 9. Update a product (replace all fields) → 200
+PUT {{baseUrl}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Wireless Mouse Pro",
+  "description": "Now with a rechargeable battery",
+  "price": 34.99,
+  "stock": 40
+}
+
+### 10. Delete a product → 204 No Content (run it twice: the 2nd time → 404)
+DELETE {{baseUrl}}/api/products/3

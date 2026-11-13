@@ -1,0 +1,38 @@
+<!--
+  ============================================================================
+   SimpleShop.Api.csproj  —  THE PROJECT FILE
+  ============================================================================
+   Every .NET project has one of these. It tells the build system (MSBuild):
+     1. Which SDK to use      → "Microsoft.NET.Sdk.Web" = an ASP.NET Core web app
+     2. Which .NET version    → TargetFramework
+     3. Which libraries we use → PackageReference (downloaded from nuget.org)
+
+   You almost never need to touch it, except to add/remove NuGet packages.
+   The easy way to add a package is the CLI:  dotnet add package <Name>
+  ============================================================================
+-->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- net10.0 = .NET 10 (Long Term Support version) -->
+    <TargetFramework>net10.0</TargetFramework>
+
+    <!-- Makes the compiler warn you when something might be null. Helps avoid NullReferenceException. -->
+    <Nullable>enable</Nullable>
+
+    <!-- Automatically adds common "using" lines (System, System.Linq, etc.) to every file. -->
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Generates an OpenAPI (JSON) description of our API at /openapi/v1.json -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.15" />
+
+    <!-- Entity Framework Core (the ORM) + the SQLite database provider -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.15" />
+
+    <!-- Swagger UI: a web page at /swagger where you can click and test the API -->
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="11.0.1" />
+  </ItemGroup>
+
+</Project>
