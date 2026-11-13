@@ -1,6 +1,5 @@
 // =============================================================================
 //  Program.cs  —  THE ENTRY POINT OF THE APPLICATION
-// =============================================================================
 //  When you type `dotnet run`, execution starts at the top of this file.
 //
 //  This file does its work in 2 phases:
